@@ -1108,9 +1108,9 @@ typedef void (CALLBACK *IDirect3DShaderValidator9_InstructionCallback)(LPCSTR un
 struct DECLSPEC_NOVTABLE IDirect3DShaderValidator9 : public IUnknown
 {
 	/*** IUnknown methods ***/
-    STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
+	STDMETHOD(QueryInterface)(THIS_ REFIID riid, void** ppvObj) PURE;
+	STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+	STDMETHOD_(ULONG, Release)(THIS) PURE;
 
 	/*** IDirect3DShaderValidator9 methods ***/
 
