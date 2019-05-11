@@ -13,6 +13,7 @@ Potential users of this interface might include:
 ## Getting Started (Developers)
 
 Just download the header file from here and #include it in your code: [d3d9_shadervalidator.h](d3d9_shadervalidator.h)
+
 If you are interested in checking out the sample code, you can clone or download this repo, and then build and run the Solution file with a recent version of Visual Studio (I used VS2017 here, but it's likely that older versions will work too just fine).
 
 ## Authors
