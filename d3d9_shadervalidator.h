@@ -2,7 +2,8 @@
 
 #include <d3d9.h> // for D3D9
 
-// Undocumented enum
+// Undocumented enum used by the user callback specified in IDirect3DShaderValidator9::Begin().
+// These enum values map directly to D3D9 error codes (which all begin with the prefix "X5%u", where %u is the error ID) that are thrown by the runtime.
 typedef enum _D3DSVERROR_ID
 {
 	// Format for these all is:
@@ -1102,7 +1103,8 @@ typedef void (CALLBACK *IDirect3DShaderValidator9_InstructionCallback)(LPCSTR un
 	LPCSTR messageString /*Helpful text containing a message description*/, 
 	LPVOID lParam /*Same user-specified lParam from IDirect3DShaderValidator9::Begin()*/);
 
-// This is an undocumented interface returned from the exported function Direct3DShaderValidatorCreate9()
+// This is an undocumented D3D9 interface.
+// You can create an instance of IDirect3DShaderValidator9 from the d3d9.dll exported function Direct3DShaderValidatorCreate9(void) (see typedef below for "Direct3DShaderValidatorCreate9Type").
 struct DECLSPEC_NOVTABLE IDirect3DShaderValidator9 : public IUnknown
 {
 	/*** IUnknown methods ***/
@@ -1111,8 +1113,19 @@ struct DECLSPEC_NOVTABLE IDirect3DShaderValidator9 : public IUnknown
     STDMETHOD_(ULONG, Release)(THIS) PURE;
 
 	/*** IDirect3DShaderValidator9 methods ***/
-	STDMETHOD(Begin)(THIS_ IDirect3DShaderValidator9_InstructionCallback lpCallbackFunc, LPVOID lParam, DWORD unknown) PURE;
-	STDMETHOD(Instruction)(THIS_ CONST char* unknownString /*Not sure what this is used for*/, UINT unknownUInt /*Not sure what this is used for*/, const DWORD* pdwInst /*Pointer to the instruction token*/, DWORD dwCount /*The instruction length, in DWORD tokens*/) PURE;
+
+	// IDirect3DShaderValidator9::Begin() must be called to start shader validation. It is illegal to call IDirect3DShaderValidator9::Begin() twice in a row without calling IDirect3DShaderValidator9::End() inbetween.
+	STDMETHOD(Begin)(THIS_ IDirect3DShaderValidator9_InstructionCallback lpCallbackFunc /*This callback is called whenever a warning or error message is encountered during shader validation*/,
+		LPVOID lParam /*The lParam specified here will be passed to the callback function*/, 
+		DWORD unknown /*Not sure what this is used for*/) PURE;
+
+	// This must be called once per shader instruction.
+	STDMETHOD(Instruction)(THIS_ CONST char* unknownString /*Not sure what this is used for*/, 
+		UINT unknownUInt /*Not sure what this is used for*/, 
+		const DWORD* pdwInst /*Pointer to the instruction token in the bytecode stream*/, 
+		DWORD dwCount /*The instruction length, in DWORD tokens*/) PURE;
+
+	// IDirect3DShaderValidator9::End() must be called to complete shader validation. It is illegal to call IDirect3DShaderValidator9::End() twice in a row, or to call it before calling IDirect3DShaderValidator9::Begin() first.
 	STDMETHOD(End)(THIS) PURE;
 };
 
