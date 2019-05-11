@@ -14,7 +14,7 @@ Potential users of this interface might include:
 
 Just download the header file from here and #include it in your code: [d3d9_shadervalidator.h](d3d9_shadervalidator.h)
 
-If you are interested in checking out the sample code, you can clone or download this repo, and then build and run the Solution file with a recent version of Visual Studio (I used VS2017 here, but it's likely that older versions will work too just fine).
+If you are interested in checking out the sample code, you can clone or download this repo, and then build and run [the Solution file](D3D9ShaderValidatorSample.sln) with a recent version of Visual Studio (I used VS2017 here, but it's likely that older versions will work too just fine).
 
 ## Authors
 
@@ -22,4 +22,4 @@ If you are interested in checking out the sample code, you can clone or download
 
 ## License
 
-This project is licensed under the zLib/LibPNG License - see the [LICENSE.txt](LICENSE.txt) file for details
+This project (including all files in this distribution) is licensed under the zLib/LibPNG License - see the [LICENSE.txt](LICENSE.txt) file for details
